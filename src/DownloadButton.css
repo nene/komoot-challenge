@@ -1,0 +1,11 @@
+.DownloadButton {
+  background: #c3e452;
+  color: black;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 16px;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+}

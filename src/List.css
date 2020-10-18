@@ -1,0 +1,9 @@
+.List {
+  list-style: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0;
+}
+.List_item {
+  padding: 8px;
+}
