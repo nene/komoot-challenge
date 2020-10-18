@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import "./Map.css";
 import "leaflet/dist/leaflet.css";
+import iconUrl from "leaflet/dist/images/marker-icon.png";
+import shadowUrl from "leaflet/dist/images/marker-shadow.png";
 import * as Leaflet from "leaflet";
 
 // Have a hike at Vilsandi nature reserve
@@ -18,6 +20,19 @@ export const Map: React.FC<{}> = () => {
       zoomOffset: -1,
       accessToken: "pk.eyJ1IjoicmVua3UiLCJhIjoiY2tnZmVzZGdtMHB6MDJzbmFoMmRzdms2eCJ9.lStxev2R9jj1QV-MvNRFtQ",
     }).addTo(mymap);
+
+    const positions: Leaflet.LatLngExpression[] = [
+      [58.372, 21.863],
+      [58.379, 21.869],
+      [58.386, 21.829],
+    ];
+    Leaflet.polyline(positions).addTo(mymap);
+
+    const icon = Leaflet.icon({ iconUrl, shadowUrl, iconSize: [25, 41], iconAnchor: [13, 40] });
+
+    positions.forEach((pos) => {
+      Leaflet.marker(pos, { icon }).addTo(mymap);
+    });
   });
 
   return <div className="Map" id="mapid" />;
