@@ -17,3 +17,12 @@ At least the map and the list should be separated react components.
 
 Send us the sources as zip file, a link to the hosted solution and
 what you have learned while developing.
+
+## Design decisions
+
+- Using plain CSS as the recommendation was to avoid 3rd party components.
+  Normally I would opt to using styled-components library.
+- All values in CSS are hard-coded.
+  For such a small project it shouldn't matter much,
+  though normally I would at least declare all colors as named constants.
+
