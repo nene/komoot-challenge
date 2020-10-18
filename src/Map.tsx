@@ -26,12 +26,21 @@ export const Map: React.FC<{}> = () => {
       [58.379, 21.869],
       [58.386, 21.829],
     ];
-    Leaflet.polyline(positions).addTo(mymap);
+    const polyline = Leaflet.polyline(positions);
+    polyline.addTo(mymap);
+
+    const movePosition = (index: number, pos: Leaflet.LatLng) => {
+      const latlngs = polyline.getLatLngs();
+      latlngs[index] = pos;
+      polyline.setLatLngs(latlngs);
+    };
 
     const icon = Leaflet.icon({ iconUrl, shadowUrl, iconSize: [25, 41], iconAnchor: [13, 40] });
 
-    positions.forEach((pos) => {
-      Leaflet.marker(pos, { icon }).addTo(mymap);
+    positions.forEach((pos, i) => {
+      const marker = Leaflet.marker(pos, { icon, draggable: true });
+      marker.on("move", () => movePosition(i, marker.getLatLng()));
+      marker.addTo(mymap);
     });
   });
 
