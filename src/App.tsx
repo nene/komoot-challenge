@@ -2,10 +2,7 @@ import React from "react";
 import "./App.css";
 import { DownloadButton } from "./DownloadButton";
 import { List } from "./List";
-
-const Map: React.FC<{}> = () => {
-  return <div className="Map" />;
-};
+import { Map } from "./Map";
 
 export const App: React.FC<{}> = () => {
   return (

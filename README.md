@@ -9,7 +9,7 @@ Your users can plan their favorite route across fields and
 hills by just placing markers as waypoints on the map.
 For detailed planning the same waypoints show up as a list where
 users can delete and rearrange them until the route is perfect and ready to download.
-The user interface should be based on the design to the left. 
+The user interface should be based on the design to the left.
 
 An excellent ReactJS Developer should manage to do this challenge in a few hours.
 Impress us with your coding skills by not using 3rd party react components and plugins.
@@ -25,4 +25,8 @@ what you have learned while developing.
 - All values in CSS are hard-coded.
   For such a small project it shouldn't matter much,
   though normally I would at least declare all colors as named constants.
-
+- Hard-coded my personal Mapbox access token.
+  Not the securest approach. But I have controls to turn that token off if needed.
+- Hard-coded ID in Map component.
+  That will limit creating multiple instances of this component,
+  which won't really matter in this simple app.

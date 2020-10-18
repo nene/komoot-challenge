@@ -14,10 +14,6 @@
   grid-template-rows: auto 1fr auto;
 }
 
-.App_map_area {
-  background: rgb(107, 170, 107);
-}
-
 .App_title {
   font-size: 24px;
   border-bottom: 4px solid #4d4d4d;
