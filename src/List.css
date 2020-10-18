@@ -6,4 +6,7 @@
 }
 .List_item {
   padding: 8px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  column-gap: 10px;
 }

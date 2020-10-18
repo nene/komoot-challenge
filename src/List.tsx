@@ -9,7 +9,7 @@ export const List: React.FC<{}> = () => {
       {waypoints.map((wp) => (
         <li className="List_item" key={wp}>
           <Icon name="draggable" />
-          Waypoint {wp}
+          <span>Waypoint {wp}</span>
           <Icon name="delete" />
         </li>
       ))}
