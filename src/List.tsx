@@ -1,4 +1,5 @@
 import React from "react";
+import { Icon } from "./Icon/Icon";
 import "./List.css";
 
 export const List: React.FC<{}> = () => {
@@ -7,7 +8,9 @@ export const List: React.FC<{}> = () => {
     <ul className="List">
       {waypoints.map((wp) => (
         <li className="List_item" key={wp}>
+          <Icon name="draggable" />
           Waypoint {wp}
+          <Icon name="delete" />
         </li>
       ))}
     </ul>

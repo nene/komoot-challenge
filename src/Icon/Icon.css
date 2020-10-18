@@ -1,0 +1,43 @@
+/*! 
+* @package IcoFont 
+* @version 1.0.1 
+* @author IcoFont https://icofont.com 
+* @copyright Copyright (c) 2015 - 2020 IcoFont 
+* @license - https://icofont.com/license/
+*/
+
+@font-face {
+  font-family: "IcoFont";
+  font-weight: normal;
+  font-style: "Regular";
+  src: url("./icofont.woff2") format("woff2"), url("./icofont.woff") format("woff");
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  font-family: "IcoFont" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+
+  /* All icons in same color and size */
+  color: #747474;
+  font-size: 24px;
+}
+
+.icon-delete:before {
+  content: "\eebb";
+}
+
+.icon-draggable:before {
+  content: "\efa2";
+}
