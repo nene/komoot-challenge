@@ -12,9 +12,10 @@ export class MapController {
   private polyline: Leaflet.Polyline;
   private markers: Leaflet.Marker[];
 
-  constructor(id: string, waypoints: Leaflet.LatLng[]) {
-    this.waypoints = [...waypoints];
+  constructor(id: string) {
     this.map = this.createMap(id);
+    // Start with empty map (no markers and zero-length polyline)
+    this.waypoints = [];
     this.polyline = this.createPolyline(this.waypoints);
     this.markers = this.createMarkers(this.waypoints);
   }
