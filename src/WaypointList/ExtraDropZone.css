@@ -1,0 +1,14 @@
+.ExtraDropZone {
+  padding: 8px;
+  height: 1em;
+  position: relative;
+}
+.ExtraDropZone-drop-target:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-top: 4px solid #1086e8;
+  display: block;
+  content: "";
+}
