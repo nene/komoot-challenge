@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { Icon } from "../Icon/Icon";
 import "./WaypointListItem.css";
 import { DeleteButton } from "./DeleteButton";
+import { useDropZone } from "./useDropZone";
 
 export interface WaypointListItemProps {
   index: number;
@@ -18,35 +19,10 @@ export const WaypointListItem: React.FC<WaypointListItemProps> = ({ index, onDel
     },
     [index],
   );
-  const handleDragEnter = useCallback((event: React.DragEvent<HTMLLIElement>) => {
-    event.currentTarget.classList.add("WaypointListItem-drop-target");
-  }, []);
-  const handleDragExit = useCallback((event: React.DragEvent<HTMLLIElement>) => {
-    event.currentTarget.classList.remove("WaypointListItem-drop-target");
-  }, []);
-  const handleDragOver = useCallback((event: React.DragEvent<HTMLLIElement>) => {
-    event.preventDefault();
-  }, []);
-  const handleDrop = useCallback(
-    (event: React.DragEvent<HTMLLIElement>) => {
-      event.preventDefault();
-      event.currentTarget.classList.remove("WaypointListItem-drop-target");
-      const oldIndex = Number(event.dataTransfer.getData("text/plain"));
-      onMove(oldIndex, index);
-    },
-    [index, onMove],
-  );
+  const dropHandlers = useDropZone({ className: "WaypointListItem-drop-target", index, onMove });
 
   return (
-    <li
-      className="WaypointListItem"
-      draggable
-      onDragStart={handleDragStart}
-      onDragEnter={handleDragEnter}
-      onDragExit={handleDragExit}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-    >
+    <li className="WaypointListItem" draggable onDragStart={handleDragStart} {...dropHandlers}>
       <Icon name="draggable" className="WaypointListItem_grip" />
       <span>Waypoint {index + 1}</span>
       <DeleteButton onClick={handleDelete} />
