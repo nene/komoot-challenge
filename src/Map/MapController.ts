@@ -6,7 +6,7 @@ import * as Leaflet from "leaflet";
 // Have a hike at Vilsandi nature reserve
 const INITIAL_POSITION = new Leaflet.LatLng(58.3728214, 21.8631477);
 
-export class WaypointMap {
+export class MapController {
   private map: Leaflet.Map;
   private waypoints: Leaflet.LatLng[];
   private polyline: Leaflet.Polyline;

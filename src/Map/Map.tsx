@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./Map.css";
 import * as Leaflet from "leaflet";
-import { WaypointMap } from "./WaypointMap";
+import { MapController } from "./MapController";
 
 export interface MapProps {
   waypoints: Leaflet.LatLng[];
 }
 
 export const Map: React.FC<MapProps> = ({ waypoints }) => {
-  const [map, setMap] = useState<WaypointMap>();
+  const [map, setMap] = useState<MapController>();
 
   useEffect(() => {
     if (!map) {
-      setMap(new WaypointMap("mapid", waypoints));
+      setMap(new MapController("mapid", waypoints));
     }
   }, [map, setMap, waypoints]);
 
