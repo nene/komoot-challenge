@@ -4,13 +4,14 @@
   font-weight: bold;
   padding: 0;
 }
-.List_item {
+
+.Waypoint {
   padding: 8px;
   display: grid;
   grid-template-columns: auto 1fr auto;
   column-gap: 10px;
 }
-.List_item_grip {
+.Waypoint_grip {
   color: #747474;
 }
 
