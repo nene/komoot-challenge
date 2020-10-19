@@ -12,14 +12,14 @@ export const Map: React.FC<MapProps> = ({ waypoints }) => {
 
   const mapEl = useRef<HTMLDivElement>(null);
 
-  // When DOM avilable and map not initialized
+  // When DOM available and map not initialized
   useEffect(() => {
     if (!map && mapEl.current) {
       setMap(new MapController(mapEl.current.id));
     }
   }, [mapEl, map, setMap]);
 
-  // When map initialized and waypoints change
+  // When map initialized and waypoints changed
   useEffect(() => {
     if (map) {
       map.updateWaypoints(waypoints);
