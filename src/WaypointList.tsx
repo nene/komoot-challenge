@@ -1,4 +1,5 @@
 import React from "react";
+import * as Leaflet from "leaflet";
 import { Icon } from "./Icon/Icon";
 import "./WaypointList.css";
 
@@ -16,12 +17,15 @@ const Waypoint: React.FC<{ nr: number }> = ({ nr }) => (
   </li>
 );
 
-export const WaypointList: React.FC<{}> = () => {
-  const waypoints = [1, 2, 3, 4];
+export interface WaypointListProps {
+  waypoints: Leaflet.LatLng[];
+}
+
+export const WaypointList: React.FC<WaypointListProps> = ({ waypoints }) => {
   return (
     <ul className="WaypointList">
-      {waypoints.map((wp) => (
-        <Waypoint key={wp} nr={wp} />
+      {waypoints.map((wp, i) => (
+        <Waypoint key={i} nr={i + 1} />
       ))}
     </ul>
   );

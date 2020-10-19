@@ -6,9 +6,13 @@ import shadowUrl from "leaflet/dist/images/marker-shadow.png";
 import * as Leaflet from "leaflet";
 
 // Have a hike at Vilsandi nature reserve
-const INITIAL_POSITION: Leaflet.LatLngExpression = [58.3728214, 21.8631477];
+const INITIAL_POSITION = new Leaflet.LatLng(58.3728214, 21.8631477);
 
-export const Map: React.FC<{}> = () => {
+export interface MapProps {
+  waypoints: Leaflet.LatLng[];
+}
+
+export const Map: React.FC<MapProps> = ({ waypoints }) => {
   useEffect(() => {
     const mymap = Leaflet.map("mapid").setView(INITIAL_POSITION, 12);
     Leaflet.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -21,12 +25,7 @@ export const Map: React.FC<{}> = () => {
       accessToken: "pk.eyJ1IjoicmVua3UiLCJhIjoiY2tnZmVzZGdtMHB6MDJzbmFoMmRzdms2eCJ9.lStxev2R9jj1QV-MvNRFtQ",
     }).addTo(mymap);
 
-    const positions: Leaflet.LatLngExpression[] = [
-      [58.372, 21.863],
-      [58.379, 21.869],
-      [58.386, 21.829],
-    ];
-    const polyline = Leaflet.polyline(positions);
+    const polyline = Leaflet.polyline(waypoints);
     polyline.addTo(mymap);
 
     const movePosition = (index: number, pos: Leaflet.LatLng) => {
@@ -37,7 +36,7 @@ export const Map: React.FC<{}> = () => {
 
     const icon = Leaflet.icon({ iconUrl, shadowUrl, iconSize: [25, 41], iconAnchor: [13, 40] });
 
-    positions.forEach((pos, i) => {
+    waypoints.forEach((pos, i) => {
       const marker = Leaflet.marker(pos, { icon, draggable: true });
       marker.on("move", () => movePosition(i, marker.getLatLng()));
       marker.addTo(mymap);
