@@ -1,0 +1,9 @@
+.WaypointIcon {
+  border: none;
+  color: white;
+  font-weight: bold;
+  background: black;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 25px;
+}

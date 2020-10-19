@@ -1,12 +1,9 @@
 import "leaflet/dist/leaflet.css";
-import iconUrl from "leaflet/dist/images/marker-icon.png";
-import shadowUrl from "leaflet/dist/images/marker-shadow.png";
 import * as Leaflet from "leaflet";
+import { createWaypointIcon } from "./WaypointIcon";
 
 // Have a hike at Vilsandi nature reserve
 const INITIAL_POSITION = new Leaflet.LatLng(58.3728214, 21.8631477);
-
-const icon = Leaflet.icon({ iconUrl, shadowUrl, iconSize: [25, 41], iconAnchor: [13, 40] });
 
 interface MapControllerOptions {
   onChange: (waypoints: Leaflet.LatLng[]) => void;
@@ -72,7 +69,10 @@ export class MapController {
   }
 
   private createMarker(latlng: Leaflet.LatLng, index: number) {
-    const marker = Leaflet.marker(latlng, { icon, draggable: true });
+    const marker = Leaflet.marker(latlng, {
+      icon: createWaypointIcon(index),
+      draggable: true,
+    });
     marker.on("move", () => this.updatePolyline(index, marker.getLatLng()));
     return marker;
   }
