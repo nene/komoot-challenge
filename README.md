@@ -35,3 +35,6 @@ what you have learned while developing.
 - Using Leaflet library for the map.
 - Using the Leaflet.LatLng type throughout the code (even in non-map-related components).
   It might be better to avoid such tight coupling with the Leaflet library.
+- Implemented some immutable array helpers.
+  Normally I would go for a library like ramda or lodash,
+  but I guess for this assignment it's better to implement them on my own.
