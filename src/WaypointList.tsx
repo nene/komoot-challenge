@@ -9,9 +9,9 @@ const DeleteButton: React.FC<{}> = () => (
   </button>
 );
 
-const Waypoint: React.FC<{ nr: number }> = ({ nr }) => (
-  <li className="Waypoint">
-    <Icon name="draggable" className="Waypoint_grip" />
+const WaypointListItem: React.FC<{ nr: number }> = ({ nr }) => (
+  <li className="WaypointListItem">
+    <Icon name="draggable" className="WaypointListItem_grip" />
     <span>Waypoint {nr}</span>
     <DeleteButton />
   </li>
@@ -25,7 +25,7 @@ export const WaypointList: React.FC<WaypointListProps> = ({ waypoints }) => {
   return (
     <ul className="WaypointList">
       {waypoints.map((wp, i) => (
-        <Waypoint key={i} nr={i + 1} />
+        <WaypointListItem key={i} nr={i + 1} />
       ))}
     </ul>
   );
