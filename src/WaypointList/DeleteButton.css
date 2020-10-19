@@ -1,0 +1,9 @@
+.DeleteButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #747474;
+}
+.DeleteButton:hover {
+  color: white;
+}
