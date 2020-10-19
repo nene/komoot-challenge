@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Map.css";
 import * as Leaflet from "leaflet";
 import { MapController } from "./MapController";
@@ -10,11 +10,13 @@ export interface MapProps {
 export const Map: React.FC<MapProps> = ({ waypoints }) => {
   const [map, setMap] = useState<MapController>();
 
+  const mapEl = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    if (!map) {
-      setMap(new MapController("mapid", waypoints));
+    if (!map && mapEl.current) {
+      setMap(new MapController(mapEl.current.id, waypoints));
     }
-  }, [map, setMap, waypoints]);
+  }, [mapEl, map, setMap, waypoints]);
 
   useEffect(() => {
     if (map) {
@@ -22,5 +24,5 @@ export const Map: React.FC<MapProps> = ({ waypoints }) => {
     }
   }, [map, waypoints]);
 
-  return <div className="Map" id="mapid" />;
+  return <div className="Map" id="mapid" ref={mapEl} />;
 };
