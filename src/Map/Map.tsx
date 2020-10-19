@@ -5,9 +5,10 @@ import { MapController } from "./MapController";
 
 export interface MapProps {
   waypoints: Leaflet.LatLng[];
+  onChange: (waypoints: Leaflet.LatLng[]) => void;
 }
 
-export const Map: React.FC<MapProps> = ({ waypoints }) => {
+export const Map: React.FC<MapProps> = ({ waypoints, onChange }) => {
   const [map, setMap] = useState<MapController>();
 
   const mapEl = useRef<HTMLDivElement>(null);
@@ -15,9 +16,9 @@ export const Map: React.FC<MapProps> = ({ waypoints }) => {
   // When DOM available and map not initialized
   useEffect(() => {
     if (!map && mapEl.current) {
-      setMap(new MapController(mapEl.current.id));
+      setMap(new MapController(mapEl.current.id, { onChange }));
     }
-  }, [mapEl, map, setMap]);
+  }, [mapEl, map, setMap, onChange]);
 
   // When map initialized and waypoints changed
   useEffect(() => {

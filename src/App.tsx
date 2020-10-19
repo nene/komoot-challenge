@@ -22,7 +22,7 @@ export const App: React.FC<{}> = () => {
         <DownloadButton />
       </div>
       <div className="App_map_area">
-        <Map waypoints={waypoints} />
+        <Map waypoints={waypoints} onChange={setWaypoints} />
       </div>
     </div>
   );

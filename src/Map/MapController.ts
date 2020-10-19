@@ -8,18 +8,24 @@ const INITIAL_POSITION = new Leaflet.LatLng(58.3728214, 21.8631477);
 
 const icon = Leaflet.icon({ iconUrl, shadowUrl, iconSize: [25, 41], iconAnchor: [13, 40] });
 
+interface MapControllerOptions {
+  onChange: (waypoints: Leaflet.LatLng[]) => void;
+}
+
 export class MapController {
   private map: Leaflet.Map;
   private waypoints: Leaflet.LatLng[];
   private polyline: Leaflet.Polyline;
   private markers: Leaflet.Marker[];
+  private onChange: (waypoints: Leaflet.LatLng[]) => void;
 
-  constructor(id: string) {
+  constructor(id: string, opts: MapControllerOptions) {
     this.map = this.createMap(id);
     // Start with empty map (no markers and zero-length polyline)
     this.waypoints = [];
     this.polyline = this.createPolyline(this.waypoints);
     this.markers = this.createMarkers(this.waypoints);
+    this.onChange = opts.onChange;
   }
 
   private createMap(id: string): Leaflet.Map {
@@ -47,6 +53,8 @@ export class MapController {
     const marker = this.createMarker(latlng, this.markers.length);
     marker.addTo(this.map);
     this.markers.push(marker);
+
+    this.onChange(this.waypoints);
   }
 
   private createPolyline(waypoints: Leaflet.LatLng[]): Leaflet.Polyline {
@@ -56,7 +64,7 @@ export class MapController {
   }
 
   private createMarkers(waypoints: Leaflet.LatLng[]): Leaflet.Marker[] {
-    const markers: Leaflet.Marker[] = waypoints.map(this.createMarker);
+    const markers: Leaflet.Marker[] = waypoints.map(this.createMarker, this);
 
     markers.forEach((marker) => marker.addTo(this.map));
 
