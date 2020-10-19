@@ -8,7 +8,7 @@ export interface ExtraDropZoneProps {
 }
 
 export const ExtraDropZone: React.FC<ExtraDropZoneProps> = ({ index, onMove }) => {
-  const dropHandlers = useDropZone({ className: "ExtraDropZone-drop-target", index, onMove });
+  const dropHandlers = useDropZone({ className: "ExtraDropZone--target", index, onMove });
 
   return <li className="ExtraDropZone" {...dropHandlers} />;
 };

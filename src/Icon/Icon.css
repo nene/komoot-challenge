@@ -1,8 +1,8 @@
-/*! 
-* @package IcoFont 
-* @version 1.0.1 
-* @author IcoFont https://icofont.com 
-* @copyright Copyright (c) 2015 - 2020 IcoFont 
+/*!
+* @package IcoFont
+* @version 1.0.1
+* @author IcoFont https://icofont.com
+* @copyright Copyright (c) 2015 - 2020 IcoFont
 * @license - https://icofont.com/license/
 */
 
@@ -32,10 +32,10 @@
   font-size: 24px;
 }
 
-.Icon-delete:before {
+.Icon--delete:before {
   content: "\eebb";
 }
 
-.Icon-draggable:before {
+.Icon--draggable:before {
   content: "\efa2";
 }

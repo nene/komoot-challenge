@@ -4,7 +4,7 @@
   height: 100%;
 }
 
-.App_sidebar {
+.App__sidebar {
   background: #383838;
   color: white;
   padding: 20px;
@@ -15,12 +15,12 @@
   height: calc(100vh - 40px);
 }
 
-.App_title {
+.App__title {
   font-size: 24px;
   border-bottom: 4px solid #4d4d4d;
   padding-bottom: 18px;
 }
 
-.App_list {
+.App__list {
   overflow-y: auto;
 }

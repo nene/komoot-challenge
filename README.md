@@ -22,6 +22,7 @@ what you have learned while developing.
 
 - Using plain CSS as the recommendation was to avoid 3rd party components.
   Normally I would opt to using styled-components library.
+  To keep styles under control, using a BEM-like naming scheme for classes `Component__subComponent--state`.
 - All values in CSS are hard-coded.
   For such a small project it shouldn't matter much,
   though normally I would at least declare all colors as named constants.

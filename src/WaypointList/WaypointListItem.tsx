@@ -19,7 +19,7 @@ export const WaypointListItem: React.FC<WaypointListItemProps> = ({ index, onDel
     },
     [index],
   );
-  const dropHandlers = useDropZone({ className: "WaypointListItem-drop-target", index, onMove });
+  const dropHandlers = useDropZone({ className: "WaypointListItem--target", index, onMove });
 
   return (
     <li className="WaypointListItem" draggable onDragStart={handleDragStart} {...dropHandlers}>

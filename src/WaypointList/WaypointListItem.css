@@ -13,7 +13,7 @@
 .WaypointListItem_grip {
   color: #747474;
 }
-.WaypointListItem-drop-target:before {
+.WaypointListItem--target:before {
   position: absolute;
   top: 0;
   left: 0;
