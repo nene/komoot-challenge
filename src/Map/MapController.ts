@@ -6,6 +6,8 @@ import * as Leaflet from "leaflet";
 // Have a hike at Vilsandi nature reserve
 const INITIAL_POSITION = new Leaflet.LatLng(58.3728214, 21.8631477);
 
+const icon = Leaflet.icon({ iconUrl, shadowUrl, iconSize: [25, 41], iconAnchor: [13, 40] });
+
 export class MapController {
   private map: Leaflet.Map;
   private waypoints: Leaflet.LatLng[];
@@ -33,7 +35,18 @@ export class MapController {
       accessToken: "pk.eyJ1IjoicmVua3UiLCJhIjoiY2tnZmVzZGdtMHB6MDJzbmFoMmRzdms2eCJ9.lStxev2R9jj1QV-MvNRFtQ",
     }).addTo(map);
 
+    map.on("click", this.appendWaypoint, this);
+
     return map;
+  }
+
+  private appendWaypoint({ latlng }: Leaflet.LeafletMouseEvent) {
+    this.waypoints.push(latlng);
+    this.polyline.addLatLng(latlng);
+
+    const marker = this.createMarker(latlng, this.markers.length);
+    marker.addTo(this.map);
+    this.markers.push(marker);
   }
 
   private createPolyline(waypoints: Leaflet.LatLng[]): Leaflet.Polyline {
@@ -43,17 +56,17 @@ export class MapController {
   }
 
   private createMarkers(waypoints: Leaflet.LatLng[]): Leaflet.Marker[] {
-    const icon = Leaflet.icon({ iconUrl, shadowUrl, iconSize: [25, 41], iconAnchor: [13, 40] });
-
-    const markers: Leaflet.Marker[] = waypoints.map((latlng, i) => {
-      const marker = Leaflet.marker(latlng, { icon, draggable: true });
-      marker.on("move", () => this.updatePolyline(i, marker.getLatLng()));
-      return marker;
-    });
+    const markers: Leaflet.Marker[] = waypoints.map(this.createMarker);
 
     markers.forEach((marker) => marker.addTo(this.map));
 
     return markers;
+  }
+
+  private createMarker(latlng: Leaflet.LatLng, index: number) {
+    const marker = Leaflet.marker(latlng, { icon, draggable: true });
+    marker.on("move", () => this.updatePolyline(index, marker.getLatLng()));
+    return marker;
   }
 
   private updatePolyline(index: number, latlng: Leaflet.LatLng) {
