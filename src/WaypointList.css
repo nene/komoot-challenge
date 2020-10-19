@@ -11,12 +11,16 @@
   grid-template-columns: auto 1fr auto;
   column-gap: 10px;
   border-radius: 3px;
+  cursor: pointer;
 }
 .WaypointListItem:hover {
   background: #444444;
 }
 .WaypointListItem_grip {
   color: #747474;
+}
+.WaypointListItem-drop-target {
+  background: #111;
 }
 
 .DeleteButton {
