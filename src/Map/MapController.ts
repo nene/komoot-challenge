@@ -50,8 +50,8 @@ export class MapController {
       marker.on("move", () => this.updatePolyline(i, marker.getLatLng()));
       return marker;
     });
-  
-    markers.forEach(marker => marker.addTo(this.map));
+
+    markers.forEach((marker) => marker.addTo(this.map));
 
     return markers;
   }
