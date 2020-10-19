@@ -44,7 +44,7 @@ export class MapController {
   }
 
   private appendWaypoint({ latlng }: Leaflet.LeafletMouseEvent) {
-    this.waypoints.push(latlng);
+    this.waypoints = [...this.waypoints, latlng];
     this.polyline.addLatLng(latlng);
 
     const marker = this.createMarker(latlng, this.markers.length);
@@ -79,14 +79,24 @@ export class MapController {
   }
 
   private updateWaypointAt(index: number, latlng: Leaflet.LatLng) {
-    this.waypoints[index] = latlng;
+    // update without mutation
+    this.waypoints = [...this.waypoints.slice(0, index), latlng, ...this.waypoints.slice(index + 1)];
     this.polyline.setLatLngs(this.waypoints);
   }
 
   public updateWaypoints(waypoints: Leaflet.LatLng[]) {
-    this.waypoints = [...waypoints];
+    // Avoid full update when no actual change
+    if (this.isEqualLatLngs(this.waypoints, waypoints)) {
+      return;
+    }
+
+    this.waypoints = waypoints;
     this.polyline.setLatLngs(this.waypoints);
     this.markers.forEach((marker) => marker.removeFrom(this.map));
     this.markers = this.createMarkers(this.waypoints);
+  }
+
+  isEqualLatLngs(xs: Leaflet.LatLng[], ys: Leaflet.LatLng[]): boolean {
+    return xs.length === ys.length && xs.every((x, i) => x.equals(ys[i]));
   }
 }
