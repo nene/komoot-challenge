@@ -18,7 +18,9 @@ export const App: React.FC<{}> = () => {
     <div className="App">
       <div className="App_sidebar">
         <h1 className="App_title">Route Builder</h1>
-        <WaypointList waypoints={waypoints} onChange={setWaypoints} />
+        <div className="App_list">
+          <WaypointList waypoints={waypoints} onChange={setWaypoints} />
+        </div>
         <DownloadButton />
       </div>
       <div className="App_map_area">

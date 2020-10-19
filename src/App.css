@@ -12,10 +12,15 @@
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto 1fr auto;
+  height: calc(100vh - 40px);
 }
 
 .App_title {
   font-size: 24px;
   border-bottom: 4px solid #4d4d4d;
   padding-bottom: 18px;
+}
+
+.App_list {
+  overflow-y: auto;
 }
