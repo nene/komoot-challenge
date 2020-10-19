@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { DownloadButton } from "./DownloadButton";
-import { List } from "./List";
+import { WaypointList } from "./WaypointList";
 import { Map } from "./Map";
 
 export const App: React.FC<{}> = () => {
@@ -9,7 +9,7 @@ export const App: React.FC<{}> = () => {
     <div className="App">
       <div className="App_sidebar">
         <h1 className="App_title">Route Builder</h1>
-        <List />
+        <WaypointList />
         <DownloadButton />
       </div>
       <div className="App_map_area">
