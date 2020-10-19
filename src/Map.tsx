@@ -8,22 +8,27 @@ import * as Leaflet from "leaflet";
 // Have a hike at Vilsandi nature reserve
 const INITIAL_POSITION = new Leaflet.LatLng(58.3728214, 21.8631477);
 
+const createMap = (id: string): Leaflet.Map => {
+  const map = Leaflet.map(id).setView(INITIAL_POSITION, 12);
+  Leaflet.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution:
+      'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: "mapbox/streets-v11",
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: "pk.eyJ1IjoicmVua3UiLCJhIjoiY2tnZmVzZGdtMHB6MDJzbmFoMmRzdms2eCJ9.lStxev2R9jj1QV-MvNRFtQ",
+  }).addTo(map);
+  return map;
+};
+
 export interface MapProps {
   waypoints: Leaflet.LatLng[];
 }
 
 export const Map: React.FC<MapProps> = ({ waypoints }) => {
   useEffect(() => {
-    const mymap = Leaflet.map("mapid").setView(INITIAL_POSITION, 12);
-    Leaflet.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-      attribution:
-        'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 18,
-      id: "mapbox/streets-v11",
-      tileSize: 512,
-      zoomOffset: -1,
-      accessToken: "pk.eyJ1IjoicmVua3UiLCJhIjoiY2tnZmVzZGdtMHB6MDJzbmFoMmRzdms2eCJ9.lStxev2R9jj1QV-MvNRFtQ",
-    }).addTo(mymap);
+    const mymap = createMap("mapid");
 
     const polyline = Leaflet.polyline(waypoints);
     polyline.addTo(mymap);
