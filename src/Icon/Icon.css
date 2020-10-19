@@ -13,10 +13,8 @@
   src: url("./icofont.woff2") format("woff2"), url("./icofont.woff") format("woff");
 }
 
-[class^="icon-"],
-[class*=" icon-"] {
-  font-family: "IcoFont" !important;
-  speak: none;
+.Icon {
+  font-family: "IcoFont";
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -26,6 +24,7 @@
   direction: ltr;
   line-height: 1;
   /* Better Font Rendering =========== */
+  font-feature-settings: "liga";
   -webkit-font-feature-settings: "liga";
   -webkit-font-smoothing: antialiased;
 
@@ -33,10 +32,10 @@
   font-size: 24px;
 }
 
-.icon-delete:before {
+.Icon-delete:before {
   content: "\eebb";
 }
 
-.icon-draggable:before {
+.Icon-draggable:before {
   content: "\efa2";
 }
