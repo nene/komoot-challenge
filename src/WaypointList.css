@@ -12,6 +12,7 @@
   column-gap: 10px;
   border-radius: 3px;
   cursor: pointer;
+  position: relative;
 }
 .WaypointListItem:hover {
   background: #444444;
@@ -19,8 +20,14 @@
 .WaypointListItem_grip {
   color: #747474;
 }
-.WaypointListItem-drop-target {
-  background: #111;
+.WaypointListItem-drop-target:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-top: 4px solid #1086e8;
+  display: block;
+  content: "";
 }
 
 .DeleteButton {

@@ -38,8 +38,8 @@ const WaypointListItem: React.FC<WaypointListItemProps> = ({ index, onDelete, on
     (event: React.DragEvent<HTMLLIElement>) => {
       event.preventDefault();
       event.currentTarget.classList.remove("WaypointListItem-drop-target");
-      const newIndex = Number(event.dataTransfer.getData("text/plain"));
-      onMove(index, newIndex);
+      const oldIndex = Number(event.dataTransfer.getData("text/plain"));
+      onMove(oldIndex, index);
     },
     [index, onMove],
   );
