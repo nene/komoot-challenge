@@ -73,11 +73,12 @@ export class MapController {
       icon: createWaypointIcon(index),
       draggable: true,
     });
-    marker.on("move", () => this.updatePolyline(index, marker.getLatLng()));
+    marker.on("move", () => this.updateWaypointAt(index, marker.getLatLng()));
+    marker.on("moveend", () => this.onChange(this.waypoints));
     return marker;
   }
 
-  private updatePolyline(index: number, latlng: Leaflet.LatLng) {
+  private updateWaypointAt(index: number, latlng: Leaflet.LatLng) {
     this.waypoints[index] = latlng;
     this.polyline.setLatLngs(this.waypoints);
   }
