@@ -55,7 +55,7 @@ export class MapController {
   }
 
   private createPolyline(waypoints: Leaflet.LatLng[]): Leaflet.Polyline {
-    const polyline = Leaflet.polyline(waypoints);
+    const polyline = Leaflet.polyline(waypoints, { weight: 6 });
     polyline.addTo(this.map);
     return polyline;
   }
