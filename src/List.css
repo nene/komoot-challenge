@@ -10,3 +10,16 @@
   grid-template-columns: auto 1fr auto;
   column-gap: 10px;
 }
+.List_item_grip {
+  color: #747474;
+}
+
+.DeleteButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #747474;
+}
+.DeleteButton:hover {
+  color: white;
+}

@@ -29,8 +29,7 @@
   -webkit-font-feature-settings: "liga";
   -webkit-font-smoothing: antialiased;
 
-  /* All icons in same color and size */
-  color: #747474;
+  /* All icons in same size */
   font-size: 24px;
 }
 
