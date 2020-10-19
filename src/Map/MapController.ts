@@ -1,6 +1,7 @@
 import "leaflet/dist/leaflet.css";
 import * as Leaflet from "leaflet";
 import { createWaypointIcon } from "./WaypointIcon";
+import { updateAt } from "../immutable-utils";
 
 // Have a hike at Vilsandi nature reserve
 const INITIAL_POSITION = new Leaflet.LatLng(58.3728214, 21.8631477);
@@ -80,7 +81,7 @@ export class MapController {
 
   private updateWaypointAt(index: number, latlng: Leaflet.LatLng) {
     // update without mutation
-    this.waypoints = [...this.waypoints.slice(0, index), latlng, ...this.waypoints.slice(index + 1)];
+    this.waypoints = updateAt(index, latlng, this.waypoints);
     this.polyline.setLatLngs(this.waypoints);
   }
 

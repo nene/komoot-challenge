@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import * as Leaflet from "leaflet";
 import { Icon } from "./Icon/Icon";
+import { deleteAt } from "./immutable-utils";
 import "./WaypointList.css";
 
 const DeleteButton: React.FC<{ onClick: () => void }> = ({ onClick }) => (
@@ -29,8 +30,7 @@ export interface WaypointListProps {
 export const WaypointList: React.FC<WaypointListProps> = ({ waypoints, onChange }) => {
   const onDelete = useCallback(
     (index: number) => {
-      // remove waypoint from array without mutation
-      onChange([...waypoints.slice(0, index), ...waypoints.slice(index + 1)]);
+      onChange(deleteAt(index, waypoints));
     },
     [waypoints, onChange],
   );
