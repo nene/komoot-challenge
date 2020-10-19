@@ -10,6 +10,10 @@
   display: grid;
   grid-template-columns: auto 1fr auto;
   column-gap: 10px;
+  border-radius: 3px;
+}
+.WaypointListItem:hover {
+  background: #444444;
 }
 .WaypointListItem_grip {
   color: #747474;
