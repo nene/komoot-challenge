@@ -3,7 +3,7 @@ import "./App.css";
 import * as Leaflet from "leaflet";
 import { DownloadButton } from "./DownloadButton";
 import { WaypointList } from "./WaypointList";
-import { Map } from "./Map";
+import { Map } from "./Map/Map";
 
 const initialWaypoints: Leaflet.LatLng[] = [
   new Leaflet.LatLng(58.372, 21.863),

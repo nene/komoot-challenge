@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from "react";
-import "./Map.css";
 import "leaflet/dist/leaflet.css";
 import iconUrl from "leaflet/dist/images/marker-icon.png";
 import shadowUrl from "leaflet/dist/images/marker-shadow.png";
@@ -8,7 +6,7 @@ import * as Leaflet from "leaflet";
 // Have a hike at Vilsandi nature reserve
 const INITIAL_POSITION = new Leaflet.LatLng(58.3728214, 21.8631477);
 
-class WaypointMap {
+export class WaypointMap {
   private map: Leaflet.Map;
   private waypoints: Leaflet.LatLng[];
   private polyline: Leaflet.Polyline;
@@ -66,25 +64,3 @@ class WaypointMap {
     this.markers = this.createMarkers(this.waypoints);
   }
 }
-
-export interface MapProps {
-  waypoints: Leaflet.LatLng[];
-}
-
-export const Map: React.FC<MapProps> = ({ waypoints }) => {
-  const [map, setMap] = useState<WaypointMap>();
-
-  useEffect(() => {
-    if (!map) {
-      setMap(new WaypointMap("mapid", waypoints));
-    }
-  }, [map, setMap, waypoints]);
-
-  useEffect(() => {
-    if (map) {
-      map.updateWaypoints(waypoints);
-    }
-  }, [map, waypoints]);
-
-  return <div className="Map" id="mapid" />;
-};
