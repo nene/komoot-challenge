@@ -20,8 +20,9 @@ export class MapController {
     this.markers = this.createMarkers(this.waypoints);
   }
 
-  createMap(id: string): Leaflet.Map {
+  private createMap(id: string): Leaflet.Map {
     const map = Leaflet.map(id).setView(INITIAL_POSITION, 12);
+
     Leaflet.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
       attribution:
         'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -31,6 +32,7 @@ export class MapController {
       zoomOffset: -1,
       accessToken: "pk.eyJ1IjoicmVua3UiLCJhIjoiY2tnZmVzZGdtMHB6MDJzbmFoMmRzdms2eCJ9.lStxev2R9jj1QV-MvNRFtQ",
     }).addTo(map);
+
     return map;
   }
 
@@ -43,18 +45,19 @@ export class MapController {
   private createMarkers(waypoints: Leaflet.LatLng[]): Leaflet.Marker[] {
     const icon = Leaflet.icon({ iconUrl, shadowUrl, iconSize: [25, 41], iconAnchor: [13, 40] });
 
-    const markers: Leaflet.Marker[] = [];
-    waypoints.forEach((pos, i) => {
-      const marker = Leaflet.marker(pos, { icon, draggable: true });
+    const markers: Leaflet.Marker[] = waypoints.map((latlng, i) => {
+      const marker = Leaflet.marker(latlng, { icon, draggable: true });
       marker.on("move", () => this.updatePolyline(i, marker.getLatLng()));
-      marker.addTo(this.map);
-      markers.push(marker);
+      return marker;
     });
+  
+    markers.forEach(marker => marker.addTo(this.map));
+
     return markers;
   }
 
-  private updatePolyline(index: number, pos: Leaflet.LatLng) {
-    this.waypoints[index] = pos;
+  private updatePolyline(index: number, latlng: Leaflet.LatLng) {
+    this.waypoints[index] = latlng;
     this.polyline.setLatLngs(this.waypoints);
   }
 
