@@ -21,7 +21,7 @@ export const App: React.FC<{}> = () => {
         <div className="App__list">
           <WaypointList waypoints={waypoints} onChange={setWaypoints} />
         </div>
-        <DownloadButton />
+        <DownloadButton waypoints={waypoints} />
       </div>
       <div className="App__mapArea">
         <Map waypoints={waypoints} onChange={setWaypoints} />

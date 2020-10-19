@@ -38,3 +38,5 @@ what you have learned while developing.
 - Implemented some immutable array helpers.
   Normally I would go for a library like ramda or lodash,
   but I guess for this assignment it's better to implement them on my own.
+- Using the basic xml library for quick XML generation.
+- Validated the generated GPX XML file with https://www.truugo.com/xml_validator/
