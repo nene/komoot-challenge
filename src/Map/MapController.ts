@@ -58,25 +58,17 @@ export class MapController {
     this.waypoints = [...this.waypoints, latlng];
     this.polyline.addLatLng(latlng);
 
-    const marker = this.createMarker(latlng, this.markers.length);
-    marker.addTo(this.map);
-    this.markers.push(marker);
+    this.markers.push(this.createMarker(latlng, this.markers.length).addTo(this.map));
 
     this.onChange(this.waypoints);
   }
 
   private createPolyline(waypoints: Leaflet.LatLng[]): Leaflet.Polyline {
-    const polyline = Leaflet.polyline(waypoints, { weight: 6 });
-    polyline.addTo(this.map);
-    return polyline;
+    return Leaflet.polyline(waypoints, { weight: 6 }).addTo(this.map);
   }
 
   private createMarkers(waypoints: Leaflet.LatLng[]): Leaflet.Marker[] {
-    const markers: Leaflet.Marker[] = waypoints.map(this.createMarker, this);
-
-    markers.forEach((marker) => marker.addTo(this.map));
-
-    return markers;
+    return waypoints.map(this.createMarker, this).map((marker) => marker.addTo(this.map));
   }
 
   private createMarker(latlng: Leaflet.LatLng, index: number) {
