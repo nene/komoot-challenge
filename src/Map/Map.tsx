@@ -32,7 +32,7 @@ export const Map: React.FC<MapProps> = ({ waypoints, selectedIndex, onChange, on
   // When map initialized and selection changed
   useEffect(() => {
     if (map) {
-      map.setSelected(selectedIndex);
+      map.setSelectedWaypoint(selectedIndex);
     }
   }, [map, selectedIndex]);
 

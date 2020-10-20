@@ -1,103 +1,31 @@
 import "leaflet/dist/leaflet.css";
 import * as Leaflet from "leaflet";
-import { createWaypointIcon } from "./WaypointIcon";
-import { updateAt } from "../immutable-utils";
-import { equalLatLngArrays } from "./equalLatLngArrays";
-import { createWaypointMarker } from "./WaypointMarker";
 import { createMapBoxTileLayer } from "./MapBoxTileLayer";
+import { NumberedPolyline, NumberedPolylineEvents } from "./NumberedPolyline";
 
 // Have a hike at Vilsandi nature reserve
 const INITIAL_POSITION = new Leaflet.LatLng(58.3728214, 21.8631477);
 
-export interface MapControllerEvents {
-  onChange: (waypoints: Leaflet.LatLng[]) => void;
-  onSelectedIndexChange: (index?: number) => void;
-}
-
 export class MapController {
   private map: Leaflet.Map;
 
-  // Don't mutate this, it's exposed externally through onChange() event
-  private waypoints: Leaflet.LatLng[];
-  // Can be mutated, only used internally
-  private markers: Leaflet.Marker[];
+  private polyline: NumberedPolyline;
 
-  private polyline: Leaflet.Polyline;
-  private selectedIndex?: number;
-  private events: MapControllerEvents;
+  constructor(id: string, events: NumberedPolylineEvents) {
+    this.map = Leaflet.map(id).setView(INITIAL_POSITION, 12);
 
-  constructor(id: string, events: MapControllerEvents) {
-    this.map = this.createMap(id);
-    // Start with empty map (no markers and zero-length polyline)
-    this.waypoints = [];
-    this.polyline = this.createPolyline(this.waypoints);
-    this.markers = this.createMarkers(this.waypoints);
-    this.events = events;
-  }
+    createMapBoxTileLayer().addTo(this.map);
 
-  private createMap(id: string): Leaflet.Map {
-    const map = Leaflet.map(id).setView(INITIAL_POSITION, 12);
+    this.polyline = new NumberedPolyline(this.map, events);
 
-    createMapBoxTileLayer().addTo(map);
-
-    map.on("click", this.appendWaypoint, this);
-
-    return map;
-  }
-
-  private appendWaypoint({ latlng }: Leaflet.LeafletMouseEvent) {
-    this.waypoints = [...this.waypoints, latlng];
-    this.polyline.addLatLng(latlng);
-
-    this.markers.push(this.createMarker(latlng, this.markers.length).addTo(this.map));
-
-    this.events.onChange(this.waypoints);
-  }
-
-  private createPolyline(waypoints: Leaflet.LatLng[]): Leaflet.Polyline {
-    return Leaflet.polyline(waypoints, { weight: 6 }).addTo(this.map);
-  }
-
-  private createMarkers(waypoints: Leaflet.LatLng[]): Leaflet.Marker[] {
-    return waypoints.map(this.createMarker, this).map((marker) => marker.addTo(this.map));
-  }
-
-  private createMarker(latlng: Leaflet.LatLng, index: number) {
-    return createWaypointMarker({
-      index,
-      latlng,
-      icon: createWaypointIcon(index, index === this.selectedIndex),
-      onDrag: this.updateWaypointAt.bind(this),
-      onDragEnd: () => this.events.onChange(this.waypoints),
-      onSelectedIndexChange: this.events.onSelectedIndexChange,
-    });
-  }
-
-  private updateWaypointAt(index: number, latlng: Leaflet.LatLng) {
-    // update without mutation
-    this.waypoints = updateAt(index, latlng, this.waypoints);
-    this.polyline.setLatLngs(this.waypoints);
+    this.map.on("click", ({ latlng }: Leaflet.LeafletMouseEvent) => this.polyline.addLatLng(latlng));
   }
 
   public updateWaypoints(waypoints: Leaflet.LatLng[]) {
-    // Avoid full update when no actual change
-    if (equalLatLngArrays(this.waypoints, waypoints)) {
-      return;
-    }
-
-    this.waypoints = waypoints;
-    this.polyline.setLatLngs(this.waypoints);
-    this.markers.forEach((marker) => marker.removeFrom(this.map));
-    this.markers = this.createMarkers(this.waypoints);
+    this.polyline.setLatLngs(waypoints);
   }
 
-  public setSelected(index?: number) {
-    if (this.selectedIndex !== undefined && this.markers[this.selectedIndex]) {
-      this.markers[this.selectedIndex].setIcon(createWaypointIcon(this.selectedIndex, false));
-    }
-    if (index !== undefined) {
-      this.markers[index].setIcon(createWaypointIcon(index, true));
-    }
-    this.selectedIndex = index;
+  public setSelectedWaypoint(index?: number) {
+    this.polyline.setSelected(index);
   }
 }
