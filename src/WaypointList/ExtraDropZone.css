@@ -12,3 +12,7 @@
   display: block;
   content: "";
 }
+/* avoid dragleave events while dragging over child elements */
+.ExtraDropZone--target * {
+  pointer-events: none;
+}

@@ -71,9 +71,12 @@ As it was recommended to not use 3rd party react components and plugins:
 
 ## What did I learn
 
-- Had not used the browser Drag'n'Drop API before. It worked pretty well,
-  but I felt I wrote too much code for this simple drag-n-drop UI.
-  There likely are libraries out there to simplify away a lot of it.
+- Had not used the browser Drag'n'Drop API before.
+  It seemed to work pretty well in Firefox,
+  but then I discovered it not quite working when testing in other browsers.
+  Turned out I had used the deprecated dragexit event.
+  Additionally I had problems with excessive dragleave events being fired,
+  which I fixed with applying `pointer-events: none` to child elements.
 
 [create-react-app]: https://create-react-app.dev/
 [styled-components]: https://styled-components.com/

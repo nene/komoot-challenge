@@ -23,3 +23,7 @@
   display: block;
   content: "";
 }
+/* avoid dragleave events while dragging over child elements */
+.WaypointListItem--target * {
+  pointer-events: none;
+}

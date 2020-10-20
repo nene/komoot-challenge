@@ -15,7 +15,7 @@ export const useDropZone = ({ className, index, onMove }: DropZoneCfg) => {
       },
       [className],
     ),
-    onDragExit: useCallback(
+    onDragLeave: useCallback(
       (event: React.DragEvent<HTMLLIElement>) => {
         event.currentTarget.classList.remove(className);
       },
