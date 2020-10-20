@@ -2,6 +2,7 @@ import "leaflet/dist/leaflet.css";
 import * as Leaflet from "leaflet";
 import { createWaypointIcon } from "./WaypointIcon";
 import { updateAt } from "../immutable-utils";
+import { equalLatLngArrays } from "./equalLatLngArrays";
 
 // Have a hike at Vilsandi nature reserve
 const INITIAL_POSITION = new Leaflet.LatLng(58.3728214, 21.8631477);
@@ -121,7 +122,7 @@ export class MapController {
 
   public updateWaypoints(waypoints: Leaflet.LatLng[]) {
     // Avoid full update when no actual change
-    if (this.isEqualLatLngs(this.waypoints, waypoints)) {
+    if (equalLatLngArrays(this.waypoints, waypoints)) {
       return;
     }
 
@@ -129,10 +130,6 @@ export class MapController {
     this.polyline.setLatLngs(this.waypoints);
     this.markers.forEach((marker) => marker.removeFrom(this.map));
     this.markers = this.createMarkers(this.waypoints);
-  }
-
-  private isEqualLatLngs(xs: Leaflet.LatLng[], ys: Leaflet.LatLng[]): boolean {
-    return xs.length === ys.length && xs.every((x, i) => x.equals(ys[i]));
   }
 
   public setSelected(index?: number) {
