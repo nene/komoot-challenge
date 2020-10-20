@@ -1,8 +1,8 @@
 import * as Leaflet from "leaflet";
 import { updateAt } from "../immutable-utils";
 import { equalLatLngArrays } from "./equalLatLngArrays";
-import { createWaypointIcon } from "./WaypointIcon";
-import { createWaypointMarker } from "./WaypointMarker";
+import { createNumberedIcon } from "./NumberedIcon";
+import { createNumberedMarker } from "./NumberedMarker";
 
 export interface NumberedPolylineEvents {
   onChange: (waypoints: Leaflet.LatLng[]) => void;
@@ -54,10 +54,10 @@ export class NumberedPolyline {
   }
 
   private createMarker(latlng: Leaflet.LatLng, index: number) {
-    return createWaypointMarker({
+    return createNumberedMarker({
       index,
       latlng,
-      icon: createWaypointIcon(index, index === this.selectedIndex),
+      icon: createNumberedIcon(index, index === this.selectedIndex),
       onDrag: this.updatePolylineAt.bind(this),
       onDragEnd: () => this.events.onChange(this.latlngs),
       onSelectedIndexChange: this.events.onSelectedIndexChange,
@@ -83,10 +83,10 @@ export class NumberedPolyline {
 
   public setSelected(index?: number) {
     if (this.selectedIndex !== undefined && this.markers[this.selectedIndex]) {
-      this.markers[this.selectedIndex].setIcon(createWaypointIcon(this.selectedIndex, false));
+      this.markers[this.selectedIndex].setIcon(createNumberedIcon(this.selectedIndex, false));
     }
     if (index !== undefined) {
-      this.markers[index].setIcon(createWaypointIcon(index, true));
+      this.markers[index].setIcon(createNumberedIcon(index, true));
     }
     this.selectedIndex = index;
   }

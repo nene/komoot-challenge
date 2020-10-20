@@ -1,6 +1,6 @@
 import * as Leaflet from "leaflet";
 
-export interface WaypointMarkerConfig {
+export interface NumberedMarkerConfig {
   latlng: Leaflet.LatLng;
   index: number;
   icon: Leaflet.Icon | Leaflet.DivIcon;
@@ -9,14 +9,14 @@ export interface WaypointMarkerConfig {
   onSelectedIndexChange: (index?: number) => void;
 }
 
-export const createWaypointMarker = ({
+export const createNumberedMarker = ({
   latlng,
   index,
   icon,
   onDrag,
   onDragEnd,
   onSelectedIndexChange,
-}: WaypointMarkerConfig): Leaflet.Marker => {
+}: NumberedMarkerConfig): Leaflet.Marker => {
   const marker = Leaflet.marker(latlng, {
     icon,
     draggable: true,
