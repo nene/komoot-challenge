@@ -13,9 +13,13 @@ interface MapControllerOptions {
 
 export class MapController {
   private map: Leaflet.Map;
+
+  // Don't mutate this, it's exposed externally
   private waypoints: Leaflet.LatLng[];
-  private polyline: Leaflet.Polyline;
+  // Can be mutated, only used internally
   private markers: Leaflet.Marker[];
+
+  private polyline: Leaflet.Polyline;
   private selectedIndex?: number;
   private onChange: (waypoints: Leaflet.LatLng[]) => void;
   private onSelectedIndexChange: (index?: number) => void;
@@ -78,8 +82,12 @@ export class MapController {
       icon: createWaypointIcon(index, index === this.selectedIndex),
       draggable: true,
     });
+
+    // While moving the marker, keep polyline and waypoints array in sync
+    // At the end of moving, fire onChange event.
     marker.on("move", () => this.updateWaypointAt(index, marker.getLatLng()));
     marker.on("moveend", () => this.onChange(this.waypoints));
+
     marker.on("mouseover", () => this.onSelectedIndexChange(index));
     marker.on("mouseout", () => this.onSelectedIndexChange(undefined));
     return marker;
