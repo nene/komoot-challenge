@@ -8,7 +8,7 @@ import { createWaypointMarker } from "./WaypointMarker";
 // Have a hike at Vilsandi nature reserve
 const INITIAL_POSITION = new Leaflet.LatLng(58.3728214, 21.8631477);
 
-interface MapControllerOptions {
+export interface MapControllerEvents {
   onChange: (waypoints: Leaflet.LatLng[]) => void;
   onSelectedIndexChange: (index?: number) => void;
 }
@@ -23,18 +23,15 @@ export class MapController {
 
   private polyline: Leaflet.Polyline;
   private selectedIndex?: number;
-  private activelyDragging: boolean = false;
-  private onChange: (waypoints: Leaflet.LatLng[]) => void;
-  private onSelectedIndexChange: (index?: number) => void;
+  private events: MapControllerEvents;
 
-  constructor(id: string, opts: MapControllerOptions) {
+  constructor(id: string, events: MapControllerEvents) {
     this.map = this.createMap(id);
     // Start with empty map (no markers and zero-length polyline)
     this.waypoints = [];
     this.polyline = this.createPolyline(this.waypoints);
     this.markers = this.createMarkers(this.waypoints);
-    this.onChange = opts.onChange;
-    this.onSelectedIndexChange = opts.onSelectedIndexChange;
+    this.events = events;
   }
 
   private createMap(id: string): Leaflet.Map {
@@ -61,7 +58,7 @@ export class MapController {
 
     this.markers.push(this.createMarker(latlng, this.markers.length).addTo(this.map));
 
-    this.onChange(this.waypoints);
+    this.events.onChange(this.waypoints);
   }
 
   private createPolyline(waypoints: Leaflet.LatLng[]): Leaflet.Polyline {
@@ -78,8 +75,8 @@ export class MapController {
       latlng,
       icon: createWaypointIcon(index, index === this.selectedIndex),
       onDrag: this.updateWaypointAt.bind(this),
-      onDragEnd: () => this.onChange(this.waypoints),
-      onSelectedIndexChange: this.onSelectedIndexChange,
+      onDragEnd: () => this.events.onChange(this.waypoints),
+      onSelectedIndexChange: this.events.onSelectedIndexChange,
     });
   }
 
