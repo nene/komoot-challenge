@@ -17,7 +17,7 @@ export interface MapControllerEvents {
 export class MapController {
   private map: Leaflet.Map;
 
-  // Don't mutate this, it's exposed externally
+  // Don't mutate this, it's exposed externally through onChange() event
   private waypoints: Leaflet.LatLng[];
   // Can be mutated, only used internally
   private markers: Leaflet.Marker[];
