@@ -21,6 +21,7 @@ export class MapController {
 
   private polyline: Leaflet.Polyline;
   private selectedIndex?: number;
+  private activelyDragging: boolean = false;
   private onChange: (waypoints: Leaflet.LatLng[]) => void;
   private onSelectedIndexChange: (index?: number) => void;
 
@@ -83,13 +84,32 @@ export class MapController {
       draggable: true,
     });
 
-    // While moving the marker, keep polyline and waypoints array in sync
+    // While moving the marker, keep polyline and waypoints array in sync,
     // At the end of moving, fire onChange event.
-    marker.on("move", () => this.updateWaypointAt(index, marker.getLatLng()));
-    marker.on("moveend", () => this.onChange(this.waypoints));
+    marker.on("dragstart", () => {
+      this.activelyDragging = true;
+    });
+    marker.on("drag", () => {
+      this.updateWaypointAt(index, marker.getLatLng());
+    });
+    marker.on("dragend", () => {
+      this.onChange(this.waypoints);
+      this.activelyDragging = false;
+    });
 
-    marker.on("mouseover", () => this.onSelectedIndexChange(index));
-    marker.on("mouseout", () => this.onSelectedIndexChange(undefined));
+    // Only fire selection change events when we aren't actively dragging.
+    // Otherwise the selection change will trigger icon change,
+    // which will result in cancelling of the drag.
+    marker.on("mouseover", () => {
+      if (!this.activelyDragging) {
+        this.onSelectedIndexChange(index);
+      }
+    });
+    marker.on("mouseout", () => {
+      if (!this.activelyDragging) {
+        this.onSelectedIndexChange(undefined);
+      }
+    });
     return marker;
   }
 
