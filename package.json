@@ -2,6 +2,13 @@
   "name": "komoot-challenge",
   "version": "0.1.0",
   "private": true,
+  "author": "Rene Saarsoo <github@triin.net>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nene/komoot-challenge.git"
+  },
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://nene.github.io/komoot-challenge",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -20,6 +27,8 @@
     "xml": "^1.0.1"
   },
   "scripts": {
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -42,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^3.1.0",
     "prettier": "^2.1.2"
   }
 }
