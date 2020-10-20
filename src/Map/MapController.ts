@@ -3,6 +3,7 @@ import * as Leaflet from "leaflet";
 import { createWaypointIcon } from "./WaypointIcon";
 import { updateAt } from "../immutable-utils";
 import { equalLatLngArrays } from "./equalLatLngArrays";
+import { createWaypointMarker } from "./WaypointMarker";
 
 // Have a hike at Vilsandi nature reserve
 const INITIAL_POSITION = new Leaflet.LatLng(58.3728214, 21.8631477);
@@ -72,38 +73,14 @@ export class MapController {
   }
 
   private createMarker(latlng: Leaflet.LatLng, index: number) {
-    const marker = Leaflet.marker(latlng, {
+    return createWaypointMarker({
+      index,
+      latlng,
       icon: createWaypointIcon(index, index === this.selectedIndex),
-      draggable: true,
+      onDrag: this.updateWaypointAt.bind(this),
+      onDragEnd: () => this.onChange(this.waypoints),
+      onSelectedIndexChange: this.onSelectedIndexChange,
     });
-
-    // While moving the marker, keep polyline and waypoints array in sync,
-    // At the end of moving, fire onChange event.
-    marker.on("dragstart", () => {
-      this.activelyDragging = true;
-    });
-    marker.on("drag", () => {
-      this.updateWaypointAt(index, marker.getLatLng());
-    });
-    marker.on("dragend", () => {
-      this.onChange(this.waypoints);
-      this.activelyDragging = false;
-    });
-
-    // Only fire selection change events when we aren't actively dragging.
-    // Otherwise the selection change will trigger icon change,
-    // which will result in cancelling of the drag.
-    marker.on("mouseover", () => {
-      if (!this.activelyDragging) {
-        this.onSelectedIndexChange(index);
-      }
-    });
-    marker.on("mouseout", () => {
-      if (!this.activelyDragging) {
-        this.onSelectedIndexChange(undefined);
-      }
-    });
-    return marker;
   }
 
   private updateWaypointAt(index: number, latlng: Leaflet.LatLng) {
