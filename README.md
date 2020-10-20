@@ -44,6 +44,10 @@ what you have learned while developing.
   But to avoid using a 3rd-party react-related library,
   I did a custom simplified implementation of it.
 
+## What did I learn
+
+- Had not used the Drag'n'Drop API before. It worked surprisingly well.
+
 [icofont]: https://www.icofont.com/
 [online xml validator]: https://www.truugo.com/xml_validator/
 [classnames]: https://www.npmjs.com/package/classnames
