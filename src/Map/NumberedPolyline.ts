@@ -20,33 +20,28 @@ export class NumberedPolyline {
   private map: Leaflet.Map;
 
   // Don't mutate this, it's exposed externally through onChange() event
-  private latlngs: Leaflet.LatLng[];
+  private latlngs: Leaflet.LatLng[] = [];
   // Can be mutated, only used internally
-  private markers: Leaflet.Marker[];
+  private markers: Leaflet.Marker[] = [];
 
   private polyline: Leaflet.Polyline;
+
   private selectedIndex?: number;
   private events: NumberedPolylineEvents;
 
   constructor(map: Leaflet.Map, events: NumberedPolylineEvents) {
     this.map = map;
-    this.latlngs = [];
-    this.polyline = this.createPolyline(this.latlngs);
-    this.markers = this.createMarkers(this.latlngs);
     this.events = events;
+    this.polyline = Leaflet.polyline([], { weight: 6 }).addTo(map);
   }
 
   public addLatLng(latlng: Leaflet.LatLng) {
     this.latlngs = [...this.latlngs, latlng];
-    this.polyline.addLatLng(latlng);
 
+    this.polyline.addLatLng(latlng);
     this.markers.push(this.createMarker(latlng, this.markers.length).addTo(this.map));
 
     this.events.onChange(this.latlngs);
-  }
-
-  private createPolyline(latlngs: Leaflet.LatLng[]): Leaflet.Polyline {
-    return Leaflet.polyline(latlngs, { weight: 6 }).addTo(this.map);
   }
 
   private createMarkers(latlngs: Leaflet.LatLng[]): Leaflet.Marker[] {
