@@ -8,6 +8,7 @@ const INITIAL_POSITION = new Leaflet.LatLng(58.3728214, 21.8631477);
 
 interface MapControllerOptions {
   onChange: (waypoints: Leaflet.LatLng[]) => void;
+  onSelectedIndexChange: (index?: number) => void;
 }
 
 export class MapController {
@@ -17,6 +18,7 @@ export class MapController {
   private markers: Leaflet.Marker[];
   private selectedIndex?: number;
   private onChange: (waypoints: Leaflet.LatLng[]) => void;
+  private onSelectedIndexChange: (index?: number) => void;
 
   constructor(id: string, opts: MapControllerOptions) {
     this.map = this.createMap(id);
@@ -25,6 +27,7 @@ export class MapController {
     this.polyline = this.createPolyline(this.waypoints);
     this.markers = this.createMarkers(this.waypoints);
     this.onChange = opts.onChange;
+    this.onSelectedIndexChange = opts.onSelectedIndexChange;
   }
 
   private createMap(id: string): Leaflet.Map {
@@ -77,6 +80,8 @@ export class MapController {
     });
     marker.on("move", () => this.updateWaypointAt(index, marker.getLatLng()));
     marker.on("moveend", () => this.onChange(this.waypoints));
+    marker.on("mouseover", () => this.onSelectedIndexChange(index));
+    marker.on("mouseout", () => this.onSelectedIndexChange(undefined));
     return marker;
   }
 

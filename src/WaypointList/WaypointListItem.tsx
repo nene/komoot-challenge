@@ -6,6 +6,7 @@ import { useDropZone } from "./useDropZone";
 
 export interface WaypointListItemProps {
   index: number;
+  selected: boolean;
   onDelete: (index: number) => void;
   onMove: (oldIndex: number, newIndex: number) => void;
   onSelectedIndexChange: (index?: number) => void;
@@ -13,6 +14,7 @@ export interface WaypointListItemProps {
 
 export const WaypointListItem: React.FC<WaypointListItemProps> = ({
   index,
+  selected,
   onDelete,
   onMove,
   onSelectedIndexChange,
@@ -27,9 +29,11 @@ export const WaypointListItem: React.FC<WaypointListItemProps> = ({
   );
   const dropHandlers = useDropZone({ className: "WaypointListItem--target", index, onMove });
 
+  const className = ["WaypointListItem", selected ? "WaypointListItem--selected" : ""].join(" ");
+
   return (
     <li
-      className="WaypointListItem"
+      className={className}
       draggable
       onDragStart={handleDragStart}
       {...dropHandlers}

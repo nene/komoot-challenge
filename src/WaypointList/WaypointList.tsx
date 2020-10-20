@@ -7,11 +7,17 @@ import { ExtraDropZone } from "./ExtraDropZone";
 
 export interface WaypointListProps {
   waypoints: Leaflet.LatLng[];
+  selectedIndex?: number;
   onChange: (waypoints: Leaflet.LatLng[]) => void;
   onSelectedIndexChange: (index?: number) => void;
 }
 
-export const WaypointList: React.FC<WaypointListProps> = ({ waypoints, onChange, onSelectedIndexChange }) => {
+export const WaypointList: React.FC<WaypointListProps> = ({
+  waypoints,
+  selectedIndex,
+  onChange,
+  onSelectedIndexChange,
+}) => {
   const onDelete = useCallback(
     (index: number) => {
       onChange(deleteAt(index, waypoints));
@@ -34,6 +40,7 @@ export const WaypointList: React.FC<WaypointListProps> = ({ waypoints, onChange,
           index={i}
           onDelete={onDelete}
           onMove={onMove}
+          selected={i === selectedIndex}
           onSelectedIndexChange={onSelectedIndexChange}
         />
       ))}

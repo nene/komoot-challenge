@@ -7,9 +7,10 @@ export interface MapProps {
   waypoints: Leaflet.LatLng[];
   selectedIndex?: number;
   onChange: (waypoints: Leaflet.LatLng[]) => void;
+  onSelectedIndexChange: (index?: number) => void;
 }
 
-export const Map: React.FC<MapProps> = ({ waypoints, selectedIndex, onChange }) => {
+export const Map: React.FC<MapProps> = ({ waypoints, selectedIndex, onChange, onSelectedIndexChange }) => {
   const [map, setMap] = useState<MapController>();
 
   const mapEl = useRef<HTMLDivElement>(null);
@@ -17,9 +18,9 @@ export const Map: React.FC<MapProps> = ({ waypoints, selectedIndex, onChange }) 
   // When DOM available and map not initialized
   useEffect(() => {
     if (!map && mapEl.current) {
-      setMap(new MapController(mapEl.current.id, { onChange }));
+      setMap(new MapController(mapEl.current.id, { onChange, onSelectedIndexChange }));
     }
-  }, [mapEl, map, setMap, onChange]);
+  }, [mapEl, map, setMap, onChange, onSelectedIndexChange]);
 
   // When map initialized and waypoints changed
   useEffect(() => {

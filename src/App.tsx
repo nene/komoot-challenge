@@ -20,12 +20,22 @@ export const App: React.FC<{}> = () => {
       <div className="App__sidebar">
         <h1 className="App__title">Route Builder</h1>
         <div className="App__list">
-          <WaypointList waypoints={waypoints} onChange={setWaypoints} onSelectedIndexChange={setSelectedIndex} />
+          <WaypointList
+            waypoints={waypoints}
+            selectedIndex={selectedIndex}
+            onChange={setWaypoints}
+            onSelectedIndexChange={setSelectedIndex}
+          />
         </div>
         <DownloadButton waypoints={waypoints} />
       </div>
       <div className="App__mapArea">
-        <Map waypoints={waypoints} selectedIndex={selectedIndex} onChange={setWaypoints} />
+        <Map
+          waypoints={waypoints}
+          selectedIndex={selectedIndex}
+          onChange={setWaypoints}
+          onSelectedIndexChange={setSelectedIndex}
+        />
       </div>
     </div>
   );
