@@ -13,18 +13,19 @@ const initialWaypoints: Leaflet.LatLng[] = [
 
 export const App: React.FC<{}> = () => {
   const [waypoints, setWaypoints] = useState(initialWaypoints);
+  const [selectedIndex, setSelectedIndex] = useState<number | undefined>(undefined);
 
   return (
     <div className="App">
       <div className="App__sidebar">
         <h1 className="App__title">Route Builder</h1>
         <div className="App__list">
-          <WaypointList waypoints={waypoints} onChange={setWaypoints} />
+          <WaypointList waypoints={waypoints} onChange={setWaypoints} onSelectedIndexChange={setSelectedIndex} />
         </div>
         <DownloadButton waypoints={waypoints} />
       </div>
       <div className="App__mapArea">
-        <Map waypoints={waypoints} onChange={setWaypoints} />
+        <Map waypoints={waypoints} selectedIndex={selectedIndex} onChange={setWaypoints} />
       </div>
     </div>
   );

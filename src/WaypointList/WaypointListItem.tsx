@@ -8,9 +8,15 @@ export interface WaypointListItemProps {
   index: number;
   onDelete: (index: number) => void;
   onMove: (oldIndex: number, newIndex: number) => void;
+  onSelectedIndexChange: (index?: number) => void;
 }
 
-export const WaypointListItem: React.FC<WaypointListItemProps> = ({ index, onDelete, onMove }) => {
+export const WaypointListItem: React.FC<WaypointListItemProps> = ({
+  index,
+  onDelete,
+  onMove,
+  onSelectedIndexChange,
+}) => {
   const handleDelete = useCallback(() => onDelete(index), [index, onDelete]);
   const handleDragStart = useCallback(
     (event: React.DragEvent<HTMLLIElement>) => {
@@ -22,7 +28,14 @@ export const WaypointListItem: React.FC<WaypointListItemProps> = ({ index, onDel
   const dropHandlers = useDropZone({ className: "WaypointListItem--target", index, onMove });
 
   return (
-    <li className="WaypointListItem" draggable onDragStart={handleDragStart} {...dropHandlers}>
+    <li
+      className="WaypointListItem"
+      draggable
+      onDragStart={handleDragStart}
+      {...dropHandlers}
+      onMouseEnter={useCallback(() => onSelectedIndexChange(index), [onSelectedIndexChange, index])}
+      onMouseLeave={useCallback(() => onSelectedIndexChange(undefined), [onSelectedIndexChange])}
+    >
       <Icon name="draggable" className="WaypointListItem_grip" />
       <span>Waypoint {index + 1}</span>
       <DeleteButton onClick={handleDelete} />

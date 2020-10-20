@@ -15,6 +15,7 @@ export class MapController {
   private waypoints: Leaflet.LatLng[];
   private polyline: Leaflet.Polyline;
   private markers: Leaflet.Marker[];
+  private selectedIndex?: number;
   private onChange: (waypoints: Leaflet.LatLng[]) => void;
 
   constructor(id: string, opts: MapControllerOptions) {
@@ -71,7 +72,7 @@ export class MapController {
 
   private createMarker(latlng: Leaflet.LatLng, index: number) {
     const marker = Leaflet.marker(latlng, {
-      icon: createWaypointIcon(index),
+      icon: createWaypointIcon(index, index === this.selectedIndex),
       draggable: true,
     });
     marker.on("move", () => this.updateWaypointAt(index, marker.getLatLng()));
@@ -97,7 +98,17 @@ export class MapController {
     this.markers = this.createMarkers(this.waypoints);
   }
 
-  isEqualLatLngs(xs: Leaflet.LatLng[], ys: Leaflet.LatLng[]): boolean {
+  private isEqualLatLngs(xs: Leaflet.LatLng[], ys: Leaflet.LatLng[]): boolean {
     return xs.length === ys.length && xs.every((x, i) => x.equals(ys[i]));
+  }
+
+  public setSelected(index?: number) {
+    if (this.selectedIndex !== undefined && this.markers[this.selectedIndex]) {
+      this.markers[this.selectedIndex].setIcon(createWaypointIcon(this.selectedIndex, false));
+    }
+    if (index !== undefined) {
+      this.markers[index].setIcon(createWaypointIcon(index, true));
+    }
+    this.selectedIndex = index;
   }
 }
