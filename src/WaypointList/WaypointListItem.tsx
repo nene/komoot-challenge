@@ -3,6 +3,7 @@ import { Icon } from "../Icon/Icon";
 import "./WaypointListItem.css";
 import { DeleteButton } from "./DeleteButton";
 import { useDropZone } from "./useDropZone";
+import { classNames } from "../classNames";
 
 export interface WaypointListItemProps {
   index: number;
@@ -29,11 +30,9 @@ export const WaypointListItem: React.FC<WaypointListItemProps> = ({
   );
   const dropHandlers = useDropZone({ className: "WaypointListItem--target", index, onMove });
 
-  const className = ["WaypointListItem", selected ? "WaypointListItem--selected" : ""].join(" ");
-
   return (
     <li
-      className={className}
+      className={classNames({ WaypointListItem: true, "WaypointListItem--selected": selected })}
       draggable
       onDragStart={handleDragStart}
       {...dropHandlers}
