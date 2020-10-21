@@ -63,8 +63,8 @@ As it was recommended to not use 3rd party react components and plugins:
   Normally I would at least declare all colors as named constants.
 - Hard-coded my personal Mapbox access token.
   Not the securest approach. But I have controls to turn that token off if needed.
-- Hard-coded HTML element `id` in Map component.
-  That will limit creating multiple instances of this component.
+- The Map component assumes it's only ever instantiated once and never removed from DOM.
+  e.g. it uses a hard-coded `id` attribute.
 - Using the `Leaflet.LatLng` type throughout the code (even in non-map-related components).
   It would be better to avoid such tight coupling with the Leaflet library.
 
