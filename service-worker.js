@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/komoot-challenge/precache-manifest.8477edd34232cd832932e05709923d17.js"
+  "/komoot-challenge/precache-manifest.c7bda02a6f58b01160321dd8efcb151b.js"
 );
 
 self.addEventListener('message', (event) => {

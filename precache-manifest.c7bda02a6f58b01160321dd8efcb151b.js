@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d7cdd0941ce3f12e3890a61ae7450486",
+    "revision": "39be2f8ede70a4c1dfca27ade53bbf3f",
     "url": "/komoot-challenge/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/komoot-challenge/static/css/2.a4567992.chunk.css"
   },
   {
-    "revision": "a3777d9cae3625525952",
+    "revision": "62293b7f0d572aa98ccc",
     "url": "/komoot-challenge/static/css/main.e15b6533.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/komoot-challenge/static/js/2.ceec4f98.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a3777d9cae3625525952",
-    "url": "/komoot-challenge/static/js/main.53be0ad4.chunk.js"
+    "revision": "62293b7f0d572aa98ccc",
+    "url": "/komoot-challenge/static/js/main.d9045521.chunk.js"
   },
   {
     "revision": "58dfc0167ba7beab5043",

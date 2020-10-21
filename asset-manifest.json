@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/komoot-challenge/static/css/main.e15b6533.chunk.css",
-    "main.js": "/komoot-challenge/static/js/main.53be0ad4.chunk.js",
-    "main.js.map": "/komoot-challenge/static/js/main.53be0ad4.chunk.js.map",
+    "main.js": "/komoot-challenge/static/js/main.d9045521.chunk.js",
+    "main.js.map": "/komoot-challenge/static/js/main.d9045521.chunk.js.map",
     "runtime-main.js": "/komoot-challenge/static/js/runtime-main.ed8186ad.js",
     "runtime-main.js.map": "/komoot-challenge/static/js/runtime-main.ed8186ad.js.map",
     "static/css/2.a4567992.chunk.css": "/komoot-challenge/static/css/2.a4567992.chunk.css",
     "static/js/2.ceec4f98.chunk.js": "/komoot-challenge/static/js/2.ceec4f98.chunk.js",
     "static/js/2.ceec4f98.chunk.js.map": "/komoot-challenge/static/js/2.ceec4f98.chunk.js.map",
     "index.html": "/komoot-challenge/index.html",
-    "precache-manifest.8477edd34232cd832932e05709923d17.js": "/komoot-challenge/precache-manifest.8477edd34232cd832932e05709923d17.js",
+    "precache-manifest.c7bda02a6f58b01160321dd8efcb151b.js": "/komoot-challenge/precache-manifest.c7bda02a6f58b01160321dd8efcb151b.js",
     "service-worker.js": "/komoot-challenge/service-worker.js",
     "static/css/2.a4567992.chunk.css.map": "/komoot-challenge/static/css/2.a4567992.chunk.css.map",
     "static/css/main.e15b6533.chunk.css.map": "/komoot-challenge/static/css/main.e15b6533.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.a4567992.chunk.css",
     "static/js/2.ceec4f98.chunk.js",
     "static/css/main.e15b6533.chunk.css",
-    "static/js/main.53be0ad4.chunk.js"
+    "static/js/main.d9045521.chunk.js"
   ]
 }
