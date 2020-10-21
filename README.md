@@ -64,14 +64,29 @@ As it was recommended to not use 3rd party react components and plugins:
 - Hard-coded my personal Mapbox access token.
   Not the securest approach. But I have controls to turn that token off if needed.
 - Hard-coded HTML element `id` in Map component.
-  That will limit creating multiple instances of this component,
-  which won't really matter in this simple app.
+  That will limit creating multiple instances of this component.
 - Using the `Leaflet.LatLng` type throughout the code (even in non-map-related components).
   It would be better to avoid such tight coupling with the Leaflet library.
 
+## UX Design
+
+I saw two options for what should happen with waypoint numbers when rearranging them:
+
+1.  Waypoints get renumbered.
+    So their numbers will always correspond to their position.
+    The downside is that after dragging items inside list, it feels like nothing happened,
+    because seemingly no waypoints swapped positions.
+2.  Waypoints keep their original numbering.
+    This eliminates the downside of the previous approach,
+    however it brings along problems of its own:
+    - the numbers on map no more reflect the order the route is to be travelled,
+    - it complicates assigning numbers to new waypoints.
+
+Given the many downsides of the second option, I decided to implement the first approach.
+
 ## What did I learn
 
-- Had not used the browser Drag'n'Drop API before.
+- I had not used the browser Drag'n'Drop API before.
   It seemed to work pretty well in Firefox,
   but then I discovered it not quite working when testing in other browsers.
   Turned out I had used the deprecated dragexit event.
