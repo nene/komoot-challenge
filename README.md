@@ -84,6 +84,13 @@ I saw two options for what should happen with waypoint numbers when rearranging 
 
 Given the many downsides of the second option, I decided to implement the first approach.
 
+Additional features that weren't explicitly called for in the assignment:
+
+- Markers can be dragged on map to adjust their position after initial placement.
+  This seemed like an essential thing to have.
+- Hovering a marker highlights the corresponding list item and vice versa.
+  This greatly reduces the mental burden of understanding which marker you're about to re-arrange or delete.
+
 ## What did I learn
 
 - I had not used the browser Drag'n'Drop API before.
