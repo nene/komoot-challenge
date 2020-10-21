@@ -110,6 +110,10 @@ Additional features that weren't explicitly called for in the assignment:
 - I stepped away from the code multiple times to come back and criticize my approach.
   This lead to several improvements (like extracting of the NumberedPolyline class).
   I should do it more often.
+- Turns out one can't use normal JS comments inside JSX.
+  I kinda knew this before, but it worked just fine in development build.
+  Only after I deployed the minified build, it all fell apart with a strange error.
+  It doesn't happen often that a comment breaks the app.
 
 [create-react-app]: https://create-react-app.dev/
 [styled-components]: https://styled-components.com/
