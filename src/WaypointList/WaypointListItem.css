@@ -4,7 +4,7 @@
   grid-template-columns: auto 1fr auto;
   column-gap: 10px;
   border-radius: 3px;
-  cursor: pointer;
+  cursor: move;
   position: relative;
 }
 .WaypointListItem:hover,
