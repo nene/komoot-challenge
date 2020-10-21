@@ -30,8 +30,8 @@ yarn start
 Tested in a few recent browsers:
 
 - Firefox 81
-- Safari 14 - drag-drop needs improvement :(
-- Chrome 86 - drag-drop needs improvement :(
+- Safari 14
+- Chrome 86
 
 No effort has been made to ensure any backwards-compatibility with older versions.
 
