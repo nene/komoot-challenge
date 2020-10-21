@@ -67,6 +67,8 @@ As it was recommended to not use 3rd party react components and plugins:
   e.g. it uses a hard-coded `id` attribute.
 - Using the `Leaflet.LatLng` type throughout the code (even in non-map-related components).
   It would be better to avoid such tight coupling with the Leaflet library.
+- The `NumberedPolyline` doesn't support adding to and removing from map
+  like all the builtin Leaflet layers do.
 
 ## UX Design
 
@@ -100,6 +102,11 @@ Additional features that weren't explicitly called for in the assignment:
   Turned out I had used the deprecated dragexit event.
   Additionally I had problems with excessive dragleave events being fired,
   which I fixed with applying `pointer-events: none` to child elements.
+- It has been a while since I previously used the Leaflet library.
+  I pretty much had forgotten all of the API and had to re-learn it.
+- I stepped away from the code multiple times to come back and criticize my approach.
+  This lead to several improvements (like extracting of the NumberedPolyline class).
+  I should do it more often.
 
 [create-react-app]: https://create-react-app.dev/
 [styled-components]: https://styled-components.com/
