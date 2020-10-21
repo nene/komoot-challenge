@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cfe2fd6c4c89dfa60d5925d9e765a3b8",
+    "revision": "d7cdd0941ce3f12e3890a61ae7450486",
     "url": "/komoot-challenge/index.html"
   },
   {
