@@ -90,6 +90,7 @@ Additional features that weren't explicitly called for in the assignment:
   This seemed like an essential thing to have.
 - Hovering a marker highlights the corresponding list item and vice versa.
   This greatly reduces the mental burden of understanding which marker you're about to re-arrange or delete.
+- Map is positioned according to user location when access given.
 
 ## What did I learn
 

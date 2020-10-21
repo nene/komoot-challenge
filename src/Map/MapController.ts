@@ -14,6 +14,10 @@ export class MapController {
   constructor(id: string, events: NumberedPolylineEvents) {
     this.map = Leaflet.map(id).setView(INITIAL_POSITION, 12);
 
+    navigator.geolocation.getCurrentPosition(({ coords }) => {
+      this.map.setView([coords.latitude, coords.longitude], 12);
+    });
+
     createMapBoxTileLayer().addTo(this.map);
 
     this.polyline = new NumberedPolyline(this.map, events);
