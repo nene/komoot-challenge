@@ -5,14 +5,8 @@ import { DownloadButton } from "./DownloadButton";
 import { WaypointList } from "./WaypointList/WaypointList";
 import { Map } from "./Map/Map";
 
-const initialWaypoints: Leaflet.LatLng[] = [
-  new Leaflet.LatLng(58.372, 21.863),
-  new Leaflet.LatLng(58.379, 21.869),
-  new Leaflet.LatLng(58.386, 21.829),
-];
-
 export const App: React.FC<{}> = () => {
-  const [waypoints, setWaypoints] = useState(initialWaypoints);
+  const [waypoints, setWaypoints] = useState<Leaflet.LatLng[]>([]);
   const [selectedIndex, setSelectedIndex] = useState<number | undefined>(undefined);
 
   return (
