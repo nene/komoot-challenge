@@ -69,6 +69,9 @@ As it was recommended to not use 3rd party react components and plugins:
   It would be better to avoid such tight coupling with the Leaflet library.
 - The `NumberedPolyline` doesn't support adding to and removing from map
   like all the builtin Leaflet layers do.
+- Besides following some basic practices (like wrapping event handlers to `useCallback`)
+  the performence of the code has not been much of a consideration.
+  I tested it with 100 waypoints, noticed no problems.
 
 ## UX Design
 
